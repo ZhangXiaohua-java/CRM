@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CRM.iml" filepath="$PROJECT_DIR$/CRM.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MBG/MBG.iml" filepath="$PROJECT_DIR$/MBG/MBG.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Prototype/Prototype.iml" filepath="$PROJECT_DIR$/Prototype/Prototype.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SeExercise/SeExercise.iml" filepath="$PROJECT_DIR$/SeExercise/SeExercise.iml" />
+    </modules>
+  </component>
+</project>

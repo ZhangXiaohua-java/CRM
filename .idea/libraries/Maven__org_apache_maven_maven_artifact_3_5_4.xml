@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.maven:maven-artifact:3.5.4">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../Libs/apache-maven-3.6.3/repo/org/apache/maven/maven-artifact/3.5.4/maven-artifact-3.5.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../Libs/apache-maven-3.6.3/repo/org/apache/maven/maven-artifact/3.5.4/maven-artifact-3.5.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../Libs/apache-maven-3.6.3/repo/org/apache/maven/maven-artifact/3.5.4/maven-artifact-3.5.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

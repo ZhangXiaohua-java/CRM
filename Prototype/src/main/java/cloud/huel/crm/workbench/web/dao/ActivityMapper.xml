@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cloud.huel.crm.workbench.web.dao.ActivityMapper">
+  <resultMap id="BaseResultMap" type="cloud.huel.crm.workbench.web.domain.Activity">
+    <constructor>
+      <idArg column="id" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="owner" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="start_date" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="end_date" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="cost" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_time" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="edit_time" javaType="java.lang.String" jdbcType="CHAR" />
+      <arg column="edit_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, owner, name, start_date, end_date, cost, description, create_time, create_by, 
+    edit_time, edit_by
+  </sql>
+  <select id="selectByExample" parameterType="cloud.huel.crm.workbench.web.domain.ActivityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from tbl_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_activity
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_activity
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cloud.huel.crm.workbench.web.domain.ActivityExample">
+    delete from tbl_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertActivity" parameterType="cloud.huel.crm.workbench.web.domain.Activity">
+    insert into tbl_activity (id, owner, name, start_date, 
+      end_date, cost, description, 
+      create_time, create_by)
+    values (#{id,jdbcType=CHAR}, #{owner,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{startDate,jdbcType=CHAR}, 
+      #{endDate,jdbcType=CHAR}, #{cost,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=CHAR}, #{createBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cloud.huel.crm.workbench.web.domain.Activity">
+    insert into tbl_activity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="owner != null">
+        owner,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="startDate != null">
+        start_date,
+      </if>
+      <if test="endDate != null">
+        end_date,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="editTime != null">
+        edit_time,
+      </if>
+      <if test="editBy != null">
+        edit_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="owner != null">
+        #{owner,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        #{startDate,jdbcType=CHAR},
+      </if>
+      <if test="endDate != null">
+        #{endDate,jdbcType=CHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        #{editBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cloud.huel.crm.workbench.web.domain.ActivityExample" resultType="java.lang.Long">
+    select count(*) from tbl_activity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tbl_activity
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.owner != null">
+        owner = #{record.owner,jdbcType=CHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startDate != null">
+        start_date = #{record.startDate,jdbcType=CHAR},
+      </if>
+      <if test="record.endDate != null">
+        end_date = #{record.endDate,jdbcType=CHAR},
+      </if>
+      <if test="record.cost != null">
+        cost = #{record.cost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.createBy != null">
+        create_by = #{record.createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editTime != null">
+        edit_time = #{record.editTime,jdbcType=CHAR},
+      </if>
+      <if test="record.editBy != null">
+        edit_by = #{record.editBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tbl_activity
+    set id = #{record.id,jdbcType=CHAR},
+      owner = #{record.owner,jdbcType=CHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      start_date = #{record.startDate,jdbcType=CHAR},
+      end_date = #{record.endDate,jdbcType=CHAR},
+      cost = #{record.cost,jdbcType=VARCHAR},
+      description = #{record.description,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=CHAR},
+      create_by = #{record.createBy,jdbcType=VARCHAR},
+      edit_time = #{record.editTime,jdbcType=CHAR},
+      edit_by = #{record.editBy,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cloud.huel.crm.workbench.web.domain.Activity">
+    update tbl_activity
+    <set>
+      <if test="owner != null">
+        owner = #{owner,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="startDate != null">
+        start_date = #{startDate,jdbcType=CHAR},
+      </if>
+      <if test="endDate != null">
+        end_date = #{endDate,jdbcType=CHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        edit_time = #{editTime,jdbcType=CHAR},
+      </if>
+      <if test="editBy != null">
+        edit_by = #{editBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cloud.huel.crm.workbench.web.domain.Activity">
+    update tbl_activity
+    set owner = #{owner,jdbcType=CHAR},
+      name = #{name,jdbcType=VARCHAR},
+      start_date = #{startDate,jdbcType=CHAR},
+      end_date = #{endDate,jdbcType=CHAR},
+      cost = #{cost,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      edit_time = #{editTime,jdbcType=CHAR},
+      edit_by = #{editBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+
+
+<!--  List<Activity> usingConditionQueryActivitiesForPage(Map<String,Object> map);-->
+
+  <select id="usingConditionQueryActivitiesForPage" parameterType="map" resultType="cloud.huel.crm.workbench.web.domain.Activity">
+    select ac.id,ac.name,
+           ac.start_date, ac.end_date, ac.cost,
+           ac.description, ac.create_time, ac.edit_time, ac.edit_by,
+           u.name as owner ,u2.name as create_by
+    from tbl_activity  as ac
+    inner join tbl_user as u
+        on ac.owner = u.id
+    inner join tbl_user as u2
+        on u2.id = ac.create_by
+    <where>
+      <if test=" name!=null and name != ''">
+            and ac.name like concat('%',#{name},'%')
+      </if>
+    <if test="startDate != null and startDate != ''">
+            and ac.start_date >= #{startDate}
+    </if>
+    <if test="endDate != null and endDate != '' " >
+            and ac.end_date &lt;= #{endDate}
+    </if>
+    <if test="ownerName != null and ownerName != '' " >
+        and u.name like concat('%',#{ownerName},'%')
+    </if>
+    </where>
+    order by ac.end_date desc
+    limit #{pageNo},#{pageSize}
+  </select>
+
+<!--  Integer queryRecordCount();-->
+  <select id="queryRecordCount" resultType="int">
+    select count(*) from tbl_activity
+  </select>
+
+<!--  Integer deleteActivitiesByIds(Integer [] id);-->
+  <delete id="deleteActivitiesByIds" parameterType="java.lang.String">
+        delete from tbl_activity where id in 
+            <foreach collection="array" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+  </delete>
+
+<!--  List<Activity> selectAllActivities();-->
+
+  <select id="selectAllActivities" resultMap="BaseResultMap">
+    select ac.id,ac.name,
+           ac.start_date, ac.end_date, ac.cost,
+           ac.description, ac.create_time, ac.edit_time,
+           u.name as owner ,u2.name as create_by , tu.name as edit_by
+    from tbl_activity  as ac
+           inner join tbl_user as u
+                      on ac.owner = u.id
+           inner join tbl_user as u2
+                      on u2.id = ac.create_by
+           left join tbl_user as tu on tu.id = ac.edit_by
+  </select>
+
+<!--  Integer insertActivity(List<Activity> activityList);-->
+
+  <insert id="insertActivityFromImportedFile" parameterType="cloud.huel.crm.workbench.web.domain.Activity">
+        insert tbl_activity
+            (id, owner, name, start_date, end_date, cost, description, create_time, create_by)
+            values
+            <foreach collection="list" item="activity" separator=",">
+                (#{activity.id},#{activity.owner},#{activity.name},#{activity.startDate},#{activity.endDate},#{activity.cost},#{activity.description},#{activity.createTime},#{activity.createBy})
+            </foreach>
+  </insert>
+
+<!--  Activity selectActivityByIdForDetailInfo(@Param("id") String id);-->
+  <select id="selectActivityByIdForDetailInfo" parameterType="string" resultMap="mappedActivityAndActivityRemark">
+    select a.id,a.name, a.start_date, a.end_date,
+           a.cost, a.description, a.create_time,
+           a.edit_time,u.name as create_by,
+           u2.name as edit_by,u3.name as owner,
+           tar.id as Rid, note_content,tar.create_time as remark_create_time,
+           tar.create_by as reamrk_create_by, tar.edit_time remark_edit_time, tar.edit_by as remark_edit_by, edit_flag, activity_id
+            from tbl_activity as a
+           inner join tbl_user as u
+                      on a.create_by = u.id
+           left join tbl_user as u2
+                     on a.edit_by = u2.id
+           inner join tbl_user as u3
+                      on a.owner = u3.id
+           left join tbl_activity_remark as tar
+                     on tar.activity_id = a.id
+            where a.id = #{id}
+  </select>
+
+
+  <resultMap id="mappedActivityAndActivityRemark" type="cloud.huel.crm.workbench.web.domain.Activity">
+    <id column="id" property="id" />
+    <result column="owner" property="owner"/>
+    <result column="name" property="name" />
+    <result column="start_date" property="startDate"/>
+    <result column="end_date" property="endDate" />
+    <result column="cost" property="cost" />
+    <result column="description" property="description" />
+    <result column="create_time" property="createTime"/>
+    <result column="create_by" property="createBy" />
+    <result column="edit_time" property="editTime" />
+    <result column="edit_by" property="editBy" />
+    <collection property="activityRemarkList" column="id" ofType="cloud.huel.crm.workbench.web.domain.ActivityRemark">
+        <id column="Rid" property="id" />
+        <result column="note_content" property="noteContent"/>
+        <result column="remark_create_time" property="createTime"/>
+        <result column="reamrk_create_by" property="createBy" />
+        <result column="remark_edit_time" property="editTime"/>
+        <result column="remark_edit_by" property="editBy"/>
+        <result column="edit_flag" property="editFlag" />
+        <result column="activity_id" property="activityId" />
+    </collection>
+  </resultMap>
+
+<!--  List<Activity> queryActivityByClueId(String clueId);-->
+
+  <select id="queryActivityByClueId" parameterType="string" resultMap="BaseResultMap">
+        select ta.id, u1.name as owner, ta.name, ta.start_date, ta.end_date,ta.cost,ta.description,
+               ta.create_by,ta.create_time,ta.edit_by,ta.edit_time
+        from tbl_activity as ta
+            inner join tbl_clue_activity_relation as tbr
+            on tbr.activity_id = ta.id
+            inner join tbl_user as u1
+            on u1.id = ta.owner
+            where tbr.clue_id = #{clueId}
+  </select>
+
+<!--  List<Activity> fuzzyQueryByName(@Param("activityName") String activityName);-->
+  
+<select id="fuzzyQueryByName" parameterType="string" resultMap="BaseResultMap">
+  <bind name="activityName" value="'%'+activityName+'%'"/>
+
+    select ta.id,u.name as owner, ta.name, ta.start_date,
+           ta.end_date, ta.cost, ta.description,
+           ta.create_time, ta.create_by, ta.edit_time, ta.edit_by
+        from tbl_activity as ta
+        inner join tbl_user as u
+        on u.id = ta.owner
+        where ta.name like #{activityName}
+        and ta.id not in(
+            select activity_id from tbl_clue_activity_relation
+            where tbl_clue_activity_relation.clue_id = #{clueId}
+        )
+</select>
+
+<!--  List<Activity> selectActivityByClueId(@Param("clueId") String clueId);-->
+
+  <select id="selectActivityByClueId" parameterType="string" resultMap="simpleMap">
+        select ta.id, name, start_date, end_date, u.name as owner
+        from tbl_clue_activity_relation as tar
+        inner join tbl_activity as ta
+        on tar.activity_id = ta.id
+        inner join tbl_user as u
+        on u.id = ta.owner
+        where tar.clue_id = #{clueId}
+  </select>
+
+  <resultMap id="simpleMap" type="cloud.huel.crm.workbench.web.domain.Activity">
+      <id column="id" property="id" />
+      <result column="name" property="name"/>
+      <result column="owner" property="owner"/>
+      <result column="start_date" property="startDate"/>
+      <result column="end_date" property="endDate"/>
+  </resultMap>
+
+<!--  List<Activity> queryActivitySelective(String [] ids);-->
+
+  <select id="queryActivitySelective" parameterType="string" resultMap="BaseResultMap">
+        select ta.id,ta.name,ta.start_date,ta.end_date,ta.cost,ta.edit_time,ta.create_time,ta.description,
+               u1.name as owner,u2.name as create_by,u3.name as edit_by
+        from tbl_activity as ta
+        inner join tbl_user as u1
+        on u1.id = ta.owner
+        inner join tbl_user as u2
+        on ta.create_by = u2.id
+        inner join tbl_user as u3
+        on u3.id = ta.edit_by
+        where ta.id in
+        <foreach collection="array" item="activity" open="(" close=")" separator=",">
+            #{activity}
+        </foreach>
+
+  </select>
+
+<!--    List<Activity> selectActivityByNameAndClueId(Map<String,String> parameterMap);-->
+
+    <select id="selectActivityByNameAndClueId" parameterType="string" resultMap="BaseResultMap">
+        <bind name="activityName" value="'%'+activityName+'%'"/>
+            select a.id, u1.name as owner, a.name, a.start_date,
+                   a.end_date, a.cost, a.description, a.create_time,
+                   u2.name as create_by, a.edit_time, a.edit_by
+            from tbl_activity as a
+            inner join tbl_user as u1
+            on u1.id = a.owner
+            inner join tbl_user as u2
+            on u2.id = a.create_by
+            where a.name like #{activityName}
+            and a.id in (
+                        select activity_id from tbl_clue_activity_relation
+                        where clue_id = #{clueId}
+                        )
+    </select>
+
+<!--    List<Activity> queryActivitiesByClueID(@Param("clueId") String clueId);-->
+
+    <select id="queryActivitiesByClueID" parameterType="string" resultMap="BaseResultMap">
+        select ta.id, ta.owner, ta.name, ta.start_date, ta.end_date, ta.cost,
+               ta.description, ta.create_time, ta.create_by, ta.edit_time, ta.edit_by
+        from tbl_activity as ta
+        inner join tbl_clue_activity_relation tcar
+        on ta.id = tcar.activity_id where tcar.clue_id = #{clueId}
+    </select>
+
+<!--    List<Activity> fuzzyQueryActivity(@Param("activityName") String activityName);-->
+    <select id="fuzzyQueryActivity" parameterType="string" resultMap="BaseResultMap">
+        <bind name="activityName" value="'%'+activityName+'%'"/>
+        select ta.id,ta.name, ta.start_date, ta.end_date,
+               ta.cost, ta.description, ta.create_time, ta.create_by, ta.edit_time,
+               ta.edit_by, u1.id, u1.login_act, u1.name as owner
+        from tbl_activity as ta
+        inner join tbl_user as u1
+        on u1.id = ta.owner
+        where ta.name like #{activityName}
+    </select>
+
+</mapper>
